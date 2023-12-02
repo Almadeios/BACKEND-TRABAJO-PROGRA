@@ -1,2 +1,18 @@
 copy usuarios(id,nombres,apellidos,tipodoc,numdoc,correo,tipo,contrasena,"imagenPerfil",idioma,prefijo,color) from 'C:\Users\VALERIA\Desktop\TRABAJOFINALPROGRA\BACKEND-TRABAJO-PROGRA\usuario.csv' DELIMITER ';' CSV HEADER;
 copy libros(id,titulo,autor,descripcion,editorial,"ISBN",categoria,"imagenLibro","cantidadEjemplares") from 'C:\Users\VALERIA\Desktop\TRABAJOFINALPROGRA\BACKEND-TRABAJO-PROGRA\libronuevo1.csv' DELIMITER ';' CSV HEADER;
+
+
+
+COPY libros(id, titulo, autor, descripcion, editorial, ISBN, categoria, "imagenLibro", "cantidadEjemplares") FROM 'C:\Users\Almadeios\Desktop\BACKEND-TRABAJO-PROGRA\libronuevo1.csv' DELIMITER ';' CSV HEADER;
+
+ CREATE TABLE libros (
+     id SERIAL PRIMARY KEY,
+     titulo VARCHAR(255) NOT NULL,
+     autor VARCHAR(255),
+     descripcion VARCHAR(255),
+     editorial VARCHAR(255),
+     ISBN VARCHAR(255),
+     categoria VARCHAR(255),
+     imagenLibro VARCHAR(255),
+     cantidadEjemplares INTEGER
+ );
