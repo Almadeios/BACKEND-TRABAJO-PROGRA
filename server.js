@@ -1,26 +1,31 @@
+// server.js
+const cors = require('cors');
 const express = require('express');
-const bodyParser = require("body-parser")
+const bodyParser = require('body-parser');
 const path = require('path');
-////RUTA A NUESTRAS APIS////
-const usuarios= require('./api/usuarios/user')
+const morgan = require('morgan');
+const seleccionarCategorias = require('./api/seleccionarCategorias');
 
-///ola
-const app = express()
-const port = 3080
+const app = express();
+const port = 3080;
 
-////MIDDLEWARE
+
+app.use(morgan('dev'));
+app.use(morgan('combined'));
+
+app.use(cors({
+  origin: 'http://tufrontend.com',  // Reemplaza con la URL de tu frontend
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,  // Habilita el intercambio de cookies a través de dominios
+}));
+
 app.use(express.static(path.join(__dirname, './static')));
 app.use(bodyParser.json());
 
-///(peticion: localhost:3080/api/users --> MI URL , direccionamiento: invocar a las rutas de user.js)
-app.use('/api/users', usuarios)
-///////////////////////////////////////
-app.get('/', (req,res) => {
-  res.sendFile(path.join(__dirname, './static/index.html'));
-});
+// Monta la nueva ruta
+app.use('/api/seleccionarCategorias', seleccionarCategorias);
+
 
 app.listen(port, () => {
-    console.log(`Server escuchando en el port::${port}`);
+  console.log(`Server escuchando en el puerto: ${port}`);
 });
-
-
